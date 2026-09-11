@@ -1,0 +1,133 @@
+services:
+
+  validator1:
+    image: hyperledger/besu:latest
+    container_name: validator1
+    networks:
+      besu-net:
+        ipv4_address: 172.30.0.2
+    volumes:
+      - ./genesis.json:/config/genesis.json
+      - ./Validator-1/data:/opt/besu/data
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+    command:
+      - --data-path=/opt/besu/data
+      - --genesis-file=/config/genesis.json
+      - --network-id=20260825
+      - --rpc-http-enabled=true
+      - --rpc-http-api=ETH,NET,QBFT,WEB3
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --rpc-http-cors-origins=all
+      - --p2p-port=30303
+      - --p2p-host=172.30.0.2
+      - --min-gas-price=0
+     
+
+  validator2:
+    image: hyperledger/besu:latest
+    container_name: validator2
+    networks:
+      besu-net:
+        ipv4_address: 172.30.0.3
+    volumes:
+      - ./genesis.json:/config/genesis.json
+      - ./Validator-2/data:/opt/besu/data
+    ports:
+      - "8546:8545"
+      - "30304:30303"
+    command:
+      - --data-path=/opt/besu/data
+      - --genesis-file=/config/genesis.json
+      - --network-id=20260825
+      - --rpc-http-enabled=true
+      - --rpc-http-api=ETH,NET,QBFT,WEB3
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --rpc-http-cors-origins=all
+      - --p2p-port=30303
+      - --min-gas-price=0
+      - --bootnodes=enode://1b632c723aa0363b33b16bd4a87c4cfa52888f3568c9b9cf410a9a78c22e5f26efc3db0961772a68295ebde8697cc47acfee383bc27e86de1f22b5f5f4f940d3@172.30.0.2:30303
+
+  validator3:
+    image: hyperledger/besu:latest
+    container_name: validator3
+    networks:
+      besu-net:
+        ipv4_address: 172.30.0.4
+    volumes:
+      - ./genesis.json:/config/genesis.json
+      - ./Validator-3/data:/opt/besu/data
+    ports:
+      - "8547:8545"
+      - "30305:30303"
+    command:
+      - --data-path=/opt/besu/data
+      - --genesis-file=/config/genesis.json
+      - --network-id=20260825
+      - --rpc-http-enabled=true
+      - --rpc-http-api=ETH,NET,QBFT,WEB3
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --rpc-http-cors-origins=all
+      - --p2p-port=30303
+      - --min-gas-price=0
+      - --bootnodes=enode://1b632c723aa0363b33b16bd4a87c4cfa52888f3568c9b9cf410a9a78c22e5f26efc3db0961772a68295ebde8697cc47acfee383bc27e86de1f22b5f5f4f940d3@172.30.0.2:30303
+
+  validator4:
+    image: hyperledger/besu:latest
+    container_name: validator4
+    networks:
+      besu-net:
+        ipv4_address: 172.30.0.5
+    volumes:
+      - ./genesis.json:/config/genesis.json
+      - ./Validator-4/data:/opt/besu/data
+    ports:
+      - "8548:8545"
+      - "30306:30303"
+    command:
+      - --data-path=/opt/besu/data
+      - --genesis-file=/config/genesis.json
+      - --network-id=20260825
+      - --rpc-http-enabled=true
+      - --rpc-http-api=ETH,NET,QBFT,WEB3
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --rpc-http-cors-origins=all
+      - --p2p-port=30303
+      - --min-gas-price=0
+      - --bootnodes=enode://1b632c723aa0363b33b16bd4a87c4cfa52888f3568c9b9cf410a9a78c22e5f26efc3db0961772a68295ebde8697cc47acfee383bc27e86de1f22b5f5f4f940d3@172.30.0.2:30303
+
+  validator5:
+    image: hyperledger/besu:latest
+    container_name: validator5
+    networks:
+      besu-net:
+        ipv4_address: 172.30.0.6
+    volumes:
+      - ./genesis.json:/config/genesis.json
+      - ./Validator-5/data:/opt/besu/data
+    ports:
+      - "8549:8545"
+      - "30307:30303"
+    command:
+      - --data-path=/opt/besu/data
+      - --genesis-file=/config/genesis.json
+      - --network-id=20260825
+      - --rpc-http-enabled=true
+      - --rpc-http-api=ETH,NET,QBFT,WEB3
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --rpc-http-cors-origins=all
+      - --p2p-port=30303
+      - --min-gas-price=0
+      - --bootnodes=enode://1b632c723aa0363b33b16bd4a87c4cfa52888f3568c9b9cf410a9a78c22e5f26efc3db0961772a68295ebde8697cc47acfee383bc27e86de1f22b5f5f4f940d3@172.30.0.2:30303
+networks:
+  besu-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
